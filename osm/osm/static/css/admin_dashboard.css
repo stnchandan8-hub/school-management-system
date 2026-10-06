@@ -1,0 +1,85 @@
+
+        body{
+            background:#f4f6f9;
+        }
+
+
+        .sidebar{
+            height:100vh;
+            background:#212529;
+            color:white;
+            position:fixed;
+            width:250px;
+        }
+
+        .sidebar a{
+            color:white;
+            text-decoration:none;
+            display:block;
+            padding:14px 20px;
+            transition:0.3s;
+        }
+
+        .sidebar a:hover{
+            background:#343a40;
+        }
+
+        .main-content{
+            margin-left:250px;
+            padding:20px;
+        }
+
+        .card-box{
+            border:none;
+            border-radius:15px;
+            color:white;
+        }
+
+        .bg1{
+            background:linear-gradient(45deg,#4e73df,#224abe);
+        }
+
+        .bg2{
+            background:linear-gradient(45deg,#1cc88a,#13855c);
+        }
+
+        .bg3{
+            background:linear-gradient(45deg,#f6c23e,#dda20a);
+        }
+
+        .bg4{
+            background:linear-gradient(45deg,#e74a3b,#be2617);
+        }
+
+        .chart-card{
+            border:none;
+            border-radius:15px;
+        }
+        
+.card{
+    transition:.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+.offcanvas{
+            width:100px;
+        }
+        #sidebar{
+            width: 250px;
+            height:350px;
+        }
+
+        .offcanvas-body a{
+            display:block;
+            text-decoration:none;
+            color:black;
+            padding:12px;
+            border-radius:5px;
+        }
+
+        .offcanvas-body a:hover{
+            background:gray;
+            color:white;
+        }

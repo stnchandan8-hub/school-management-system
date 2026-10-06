@@ -1,0 +1,144 @@
+{% load static %}
+
+<html><head> <link rel="stylesheet" href="{% static 'css/register_form.css' %}">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+.carousel-item  img {
+    height: -110vh;
+    width: 100%;
+    object-fit: cover;
+    position: center;
+}
+.box{
+  display: flex;
+  gap: 10px;
+}
+.error{
+  color:red;
+  font-size:15px;
+  font-weight: 100;
+}
+
+
+
+</style>
+</head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand">ONLINE SCHOOL MANAGEMENT SYSTEM</a>
+  <div class="box">
+  <button class="btn btn-outline-success me-2" onclick="openPopup('login_form')">
+        Login
+    </button>
+   
+      <button class="btn btn-outline-success me-2 " onclick="openPopup('register_form')">
+        Register
+    </button>
+    <button class="btn btn-outline-success me-2 " onclick="openPopup('')">
+        Contact us
+    </button>
+  </div>
+  
+</nav>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/school11.jpg' %}" class="d-block " alt="...">
+    </div>
+    <div class="carousel-item" id="image2">
+      <img src="{% static 'images/school6.jpg' %}" class="d-block " alt="...">
+    </div>
+    <div class="carousel-item" id="image2">
+      <img src="{% static 'images/school12.jpg' %}" class="d-block " alt="...">
+    </div>
+    
+  </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Registration form-->
+<div  class="popup" id="register_form" style="display:none,">
+
+        <div class="popup-content" >
+
+            <span class="close" onclick="closePopup('register_form')">
+                &times;
+            </span>
+
+            <h3>REGISTRATION HERE</h3>
+             
+
+            <form method="POST"  id="register_form1" action="{% url 'register'%}">
+                {%csrf_token%}
+                
+                <label>UserName</label>
+                 <input type="text" placeholder="Username" id="username1" name="username" >
+                 <span id="username_error" class="error"></span><br>
+                 
+                <label>Email Address</label>
+                 <input type="text" placeholder="Email Address" id="email1"  name="email">
+                 <span id="user_email_error" class="error"></span><br>
+                 <label>Password</label>
+                 <input type="text" id="password1" placeholder="Password" name="password">
+                 <span id="password_error" class="error"></span><br>
+                 <label>Confirm Password</label>
+                 <input type="text" placeholder="Confirm Password" id="confirm_password1" name="confirm_password">
+                 <span id="confirm_password_error" class="error">{{password}}</span><br>
+                 <label>Register as Teacher or Student</label>
+                  <p style="display: flex;">Teacher<input type="radio" id="group_id1" name="group_id" value="3">Student<input type="radio" id="group_id1" name="group_id" value="2"></p>
+                 <span id="group_id_error" class="error"></span><br>
+                    <button  type="submit" class="submit-btn">
+                  Register
+                </button>
+                 
+        
+            </form>
+
+        </div>
+
+    </div>
+  <!--Login popup form-->
+  <div  class="popup" id="login_form" style="display:none,">
+
+        <div class="popup-content" >
+
+            <span class="close" onclick="closePopup('login_form')">
+                &times;
+            </span>
+
+            <h3>LOGIN HERE</h3>
+
+            <form method="POST"  id="login_form" action="{% url 'login'%}">
+                {%csrf_token%}
+                
+                <label>UserName</label>
+                 <input type="text" placeholder="Username" id="username2" name="username" >
+                 <span id="username_error2" class="error"></span><br>
+                <label>Password</label>
+                 <input type="text" id="password2" placeholder="Password" name="password">
+                 <span id="password_error2" class="error"></span><br>
+                 
+                    <button  type="submit" class="submit-btn">
+                  Login
+                </button>
+                 
+        
+            </form>
+
+        </div>
+
+    </div>
+
+<script src="{% static 'js/add_validation_to_login.js' %}"></script>
+<script src="{% static 'js/add_teacher_form_popup.js' %}"></script>
+<script src="{% static 'js/add_validation_form_to_register.js' %}"></script>
+{% if messages %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("register_form").style.display = "block";
+});
+</script>
+{% endif %}
+    </body>
+</html>

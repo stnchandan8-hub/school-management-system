@@ -1,0 +1,65 @@
+
+
+<html><head>    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity</head>
+    <body>
+        
+
+    <table class="table table-info table-striped" width="100%" border="1" cellpadding="10">
+
+        <tr>
+            
+            <th>RollNo</th>
+            <th>Student  First Name</th>
+            <th>Student  Last Name</th>
+            <th>Class Name</th>
+            <th>Session Year</th>
+            <th>Exam Name</th>
+            <th>Gender</th>
+            <th>Mathematics</th>
+            <th>Drawing</th>
+            <th>Project</th>
+            <th>English</th>
+            
+            <th>Rime</th>
+
+
+            
+            
+        </tr>
+
+        {% for r in stud %}
+
+        <tr >
+
+            <td>{{r.rollno.rollno}}</td>
+
+            <td>{{r.rollno.s1stname}}</td>
+            <td>{{r.rollno.slstname}}</td>
+            <td>{{r.rollno.cname}}</td>
+
+            <td >{{r.seesion_year}}</td>
+            <td>{{r.exam_name}}</td>
+            <td>{{r.rollno.gender}}</td>
+                <td>{{r.math}}</td>
+                <td>{{r.drawing}}</td>
+                <td>{{r.project}}</td>
+                <td>{{r.english}}</td>
+                <td>{{r.rime}}</td>
+                
+            
+            
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+</html>

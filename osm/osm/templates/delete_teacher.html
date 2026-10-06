@@ -1,0 +1,24 @@
+
+
+<div class="form-container" style="display:none" id="deleteformteacher">
+
+    <h2>Enter Teacher Id Here To Delete</h2>
+
+    <form method="POST">
+        {%csrf_token%}
+
+        <div class="input-box">
+            
+            
+            <input  placeholder="Teacher id"  type="number" name="tid" value="{{ teacher.tid }}">
+        </div>
+         
+
+        <button type="submit">Delete</button>
+
+    </form>
+
+    
+
+</div>
+

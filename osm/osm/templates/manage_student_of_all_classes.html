@@ -1,0 +1,291 @@
+{% load static %}
+
+<html><head><link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/add_teacher_popup.css' %}">
+        <style>
+            .radio_collection {
+              display: flex;
+               gap: 20px;
+              align-items: center;
+       }
+       .error{ color:red;
+        font-size: 15px;
+        display: block;
+       }
+       .message{
+        color:red;
+        font-size: 30px;
+        font-weight: 100;
+       }
+        body{
+            background: linear-gradient(360deg, #1e3c72, #2a5298);
+        }    
+
+
+        </style>
+        
+   
+</head><p  style="color:black; position:relative" > ALL THE STUDENTS LISTED HERE</p>
+       <button class="btn btn-success me-2 " onclick="openPopup('add_student')">
+        Add
+    </button>
+   
+      <button class="btn btn-danger me-2 " onclick="openPopup('delete_student')">
+        Delete
+    </button>
+    <button class="btn btn-warning me-2 "  onclick="openPopup('update_student')">
+        Update
+    </button>
+    <div >
+   <a  style="margin-left:1200px;margin-top:-50px;" class="btn btn-outline-danger me-2" data-toggle="modal"data-target="#exampleModal" data-whatever="@getbootstrap" href="{% url 'admin_dashboard'%}" role="button" >Home</a>
+ </div>
+    <div class="container mt-4" style="display: flex;">
+
+  <form class="d-flex" method="POST" id="search_student" action="{% url 'search_student' %}">
+    {%csrf_token%}
+    <table><tr><td>
+    <input 
+      class="form-control me-2"
+      type="search"
+      id="student_id2"
+      name="q"
+      placeholder="Search student id"
+      style="max-width: 300px;"
+    ></td><td><button class="btn btn-primary" type="submit">
+      Search
+    </button>
+    </td></tr>
+    <tr><td>
+    <span id="student_rollno_error3" class="error"></span>
+    </td></tr></table>
+  </form>
+</div>
+          
+
+    {% if messages%}
+     {% for message in messages%}
+
+          <div class="message">
+            {{message}}
+
+          </div>
+     {% endfor %}
+    {% endif%}     
+    <body>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="card chart-card shadow mt-4" style="width: 1550;">
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead class="table-dark">
+                    
+                    <tr>
+                        <th >ROLLNO</th>
+                        <th >FIRST NAME</th>
+                        <th>LAST NAME</th>
+                         <th >CLASS</th>
+                        <th >GENDER</th>
+                        <th >ADDRESS</th>
+                        <th>PHONE NUMBER</th>
+                        <th >AGE</th>
+                        <th >PARENT FIRST NAME</th>
+                        <th >PARENT LAST NAME</th>
+                        <th colspan="3">ACTIONS</th>
+                    </tr>
+                    
+                </thead>
+
+                <tbody>
+                  
+                        {%for i in vs%}
+                    <tr>
+                      <th >{{i.rollno}}</th>
+                            <td>{{i.s1stname}}</td>
+                           <td>{{i.slstname}}</td>
+                           <td>{{i.cname}}</td>
+                           <td>{{i.gender}}</td>
+                           <td>{{i.address}}</td>
+                           <td>{{i.contact_no}}</td>
+                           <td>{{i.age}}</td>
+                           <td>{{i.father_1stname}}</td>
+                           <td>{{i.father_lstname}}</td>
+                            
+                            <td  style="display:flex">
+                              <button class="btn btn-success me-2 " onclick="openPopup('add_student')">Add </button>
+                              <button class="btn btn-danger me-2 " onclick="openPopup('delete_student')"> Delete
+
+                              </button>
+                              <button class="btn btn-warning me-2 " onclick="openPopup('update_student')">Update </button>
+                            </td>
+    </tr>
+    {%endfor%} </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+
+   
+
+</div>
+<!-- add student popup form-->
+    <div  class="popup" id="add_student" style="display:none,">
+
+        <div class="popup-content" >
+
+            <span class="close" onclick="closePopup('add_student')">
+                &times;
+            </span>
+
+            <h3>Add Students</h3>
+
+            <form method="POST"  id="student_form" action="{% url 'add_students_of_all_classes'%}">
+                {%csrf_token%}
+                
+                <label>Student Id</label>
+                  <input type="text" id="rollno1"  placeholder="Rollno" name="rollno" >
+                 <span id="rollno1_error1" class="error"></span>
+                 <label>User Id</label>
+                  <input type="text" id="username"  placeholder="username" name="username" >
+                 <span id="username_error" class="error"></span>
+                 
+                <label>First Name</label>
+                 <input type="text" placeholder="First Name" id="first_name1"    name="s1stname" >
+            <span id="first_name1_error1" class="error"></span>
+                 <td><label>Last Name</label>
+                 <input type="text" placeholder="Last Name" id="last_name1"  name="slstname">
+                  <span id="last_name1_error1" class="error"></span>
+                 <label>Class Name</label>
+                  <input type="text" placeholder="class Name" id="cname1" name="cname">
+                  <span id="cname1_error1" class="error"></span>
+                <div class="radio_collection"><label>Gender:</label>
+                 <input type="radio" name="gender" id="gender1" value="Male"> Male
+                 <input type="radio" name="gender" id="gender1" value="Female"> Female
+                  
+                 </div>
+                 <span id="gender1_error1" class="error"></span>
+                 <label>Address</label>
+                 <input type="text" placeholder="Address" id="address1" name="address">
+                 <span id="address1_error1" class="error"></span>
+                 <label>Phone Number</label>
+                 <input type="text" placeholder="Phone Number" id="phone_number1"  name="contact_no">
+                 <span id="phone_number1_error1" class="error"></span>
+                   <label>Age</label>
+                   <input type="text" placeholder="Age" id="s_age1" name="age">
+                  <span id="s_age1_error1" class="error"></span>
+                  <label>Parent First Name</label>
+                  <input type="text" placeholder="Parent First Name" id="pfn1"  name="father_1stname">
+                  <span id="pfn1_error1" class="error"></span>
+                  <label>Parent Last Name</label>
+                  <input type="text" placeholder="parent Last Name"  id="pln1" name="father_lstname">
+            <span id="pln1_error1" class="error"></span>
+                 
+                 
+                    <button  type="submit" class="submit-btn">
+                    Add
+                </button>
+                 
+        
+            </form>
+
+        </div>
+
+    </div>
+         <!-- delete form -->
+    <div class="popup" id="delete_student" style="display:none">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="closePopup('delete_student')">
+                &times;
+            </span>
+
+            <h3>Delete Student</h3>
+
+            <form method="POST" id="student_delete" action="{% url 'delete_students_of_all_classes'%}">
+                {%csrf_token%}
+
+                <input type="text"  name="rollno" id="rollno2" placeholder="student Rollno">
+                <span id="rollno2_error2" class="error"></span>
+                <button  type="submit" class="btn btn-danger me-2 " class="submit-btn">
+                    Delete
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- update teacher form -->
+    <div  class="popup" id="update_student" style="display:none,">
+
+        <div class="popup-content" >
+
+            <span class="close" onclick="closePopup('update_student')">
+                &times;
+            </span>
+
+            
+            <h3>Update Students</h3>
+
+            <form method="POST"  id="update_student" action="{% url 'update_students_of_all_classes'%}">
+                {%csrf_token%}
+                
+                <label>Student Id</label>
+                  <input type="text" id="rollno3"  placeholder="Rollno" name="rollno" >
+                  <span id="rollno_error3" class="error"></span>
+                 <label>First Name</label>
+                 <input type="text" placeholder="First Name" id="first_name1"    name="s1stname" >
+                 <label>Last Name</label>
+                 <input type="text" placeholder="Last Name" id="last_name1"  name="slstname">
+                <label>Class Name</label>
+                 <input type="text" placeholder="class Name" id="cname1" name="cname">
+                  <div class="radio_collection"><label>Gender:</label>
+                 <input type="radio" name="gender"  value="Male"> Male
+                 <input type="radio" name="gender" value="Female"> Female
+                  </div>
+                 <label>Address</label>
+                 <input type="text" placeholder="Address" name="address">
+                
+                 <label>Phone Number</label>
+                 <input type="text" placeholder="Phone Number"   name="contact_no">
+                   
+                   <label>Age</label>
+                   <input type="text" placeholder="Age" name="age">
+                  
+                  <label>Parent First Name</label>
+                  <input type="text" placeholder="Parent First Name"   name="father_1stname">
+                  
+                  <label>Parent Last Name</label>
+                  <input type="text" placeholder="parent Last Name"   name="father_lstname">
+            
+                 
+                 
+                    <button  type="submit" class="submit-btn">
+                    Update
+                </button>
+                 
+        
+            </form>
+
+        </div>
+
+    </div>
+
+   <script src="{% static 'js/add_validation_form_to_student_addition.js'%}"></script>
+   <script src="{% static 'js/add_validation_form_to_student_delete.js'%}"></script>
+   <script  src="{% static 'js/add_validation_to_update_student.js'%}"></script>
+    
+    <script  src="{% static 'js/add_teacher_form_popup.js'%}"></script>
+    <script src="{% static 'js/add_validation_search_student.js'%}"></script>
+
+    </body>
+</html>

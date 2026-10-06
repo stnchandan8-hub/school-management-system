@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap Icons -->
+ <link rel="stylesheet" href="{% static 'css/add_teacher_popup.css' %}">
+        
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+
+<style>
+    .upper_cotainer{
+        margin:0;
+    height:150vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color:darkseagreen;
+    
+    font-family:Arial;
+
+    }
+
+body{
+    margin:0;
+    height:120vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color:darkseagreen;
+    
+    font-family:Arial;
+}
+
+.form-container{
+    width:380px;
+    background:white;
+    padding:30px;
+    background-color:bisque;
+    border-radius:16px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+h5{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+.input-box{
+    position:relative;
+    margin-bottom:18px;
+}
+
+.input-box i{
+    position:absolute;
+    left:12px;
+    top:12px;
+    color:#ee0979;
+    font-size:18px;
+}
+
+.input-box input{
+    width:90%;
+    padding:12px 12px 12px 40px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    transition:0.3s;
+}
+
+.input-box input:focus{
+    border-color:#ee0979;
+    box-shadow:0 0 8px rgba(238,9,121,0.3);
+}
+.input-box1{
+    position:relative;
+    margin-bottom:18px;
+}
+
+
+
+.input-box1 input{
+    width:90%;
+    height:30%;
+    padding:0px 40px 80px 20px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    transition:0.3s;
+}
+
+.input-box1 input:focus{
+    border-color:black;
+    box-shadow:0 0 8px rgba(238,9,121,0.3);
+}
+
+button{
+    width:40%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,blue,blue);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+    margin-left:110px;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+.top_form{
+    position: center;
+    display: flex;
+}
+.status{
+    width: 100px;
+    height: 30px;
+}
+.error{
+    color: red;
+    font-size: 15px;
+    font-weight: 100;
+}
+
+
+
+</style>
+</head>
+
+<body>
+    
+    
+   
+    
+
+<div class="form-container">
+    <form class="row g-3"  id="check_status"  method="POST" action="{% url 'show_details_of_teacher_for_leave'%}">
+ 
+  <div class="col-auto">
+    <label for="inputPassword2" >Enter Teacher id first</label>
+    <input type="number"  class="form-control" name="tid" id="teacher_id1"  placeholder="Teacher Id">
+    <span class="error" id="teacher_id_error1"></span>
+    
+  </div>
+  <div class="col-auto">
+    <button  sttype="submit" class="btn btn-primary mb-3">submit</button>
+  </div>
+</form><br>
+<button class="btn btn-warning me-2 " onclick="openPopup('check_leave_status')">check status
+        
+    </button>
+
+    
+   
+    {% if messages %}
+    {%for message in messages%}
+      <p style="color: red;font-size: 20px;font-weight: 100;">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    
+
+    <h2>Apply Leave Here</h2>
+
+    <form method="POST" id="teacher_leave" action="{% url 'apply_leave_by_teacher'%}">
+        {%csrf_token%}
+
+        <div class="input-box">
+            
+            <input type="number" placeholder="Teacher Id" id="teacher_id" value="{{tqs.tid}}" name="tid">
+            <span id="teacher_id_error" class="error"></span>
+        </div>
+         <div class="input-box">
+           
+            <input type="text" placeholder="Teacher First Name" id="first_name" value="{{tqs.t_1st_name}}" >
+              <span id="first_name_error" class="error"></span>
+        </div>
+        <div class="input-box">
+           
+            <input type="text" placeholder="Teacher Last Name" id="last_name" value="{{tqs.t_last_name}}" >
+            <span id="last_name_error" class="error"></span>
+        </div>
+         <div class="input-box1" >
+            
+            <input type="text" placeholder="Reason for leave" id="reason"  name="leave_reason">
+             <span id="reason_error" class="error"></span>
+        </div>
+         <div class="input-box">
+            
+            <input type="text" placeholder="phone number" id="ph_no"  value="{{tqs.contactno}}">
+            <span id="ph_no_error" class="error"></span>
+        </div>
+         <div class="input-box">
+            
+            <input type="date" placeholder="date1_of_apply" id="date" name="date1_of_apply">
+            <span id="date_error" class="error"></span>
+        </div>
+         
+
+        <button type="submit">submit</button>
+
+    </form>
+
+    
+</div>
+<!--form for get teacher leave  details--> 
+<div class="popup" id="check_leave_status" style="display:none;">
+
+        <div class="popup-content" style="width: 150px;height: 150px;">
+
+            <span class="close" onclick="closePopup('check_leave_status')">
+                &times;
+            </span>
+
+            <h3>Enter Teacher Id</h3>
+        
+            <form id="check_leave_status" class="form1" action="{% url 'show_status_of_teacher_leave'%}" method="POST">
+        <input type="number" name="tid" id="teacher_id2" style="width: 100px;"  placeholder="Enter Teacher Id">
+        <span id="teacher_id_error2" class="error"></span>
+        <button  class="btn btn-warning me-2 " type="submit" style="margin-left: 1px;margin-top: 3px;position:center;text-align: center;width: 100px;;">submit</button>
+           </form>
+
+        </div>
+
+    </div>
+ <script  src="{% static  'js/check_leave_status_of_teacher.js'%}"></script>
+ <script  src="{% static 'js/teacher_leave_validation1.js'%}"></script>
+ <script  src="{% static 'js/teacher_leave_validation.js'%}"></script>
+ <script  src="{% static 'js/add_teacher_form_popup.js'%}"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,139 @@
+<html>
+    <head>
+<style>
+
+body{
+    margin:0;
+    height:130vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+    font-family:Arial;
+}
+
+.form-container{
+    width:380px;
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    background-color:aqua;
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+.input-box{
+    position:relative;
+    margin-bottom:18px;
+}
+
+.input-box i{
+    position:absolute;
+    left:12px;
+    top:12px;
+    color:#ee0979;
+    font-size:18px;
+}
+
+.input-box input{
+    width:90%;
+    padding:12px 12px 12px 40px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    transition:0.3s;
+}
+
+.input-box input:focus{
+    border-color:black;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.5);
+}
+
+button{
+    width:50%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,yellow,yellow);
+    color:black;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+
+
+</style></head>
+
+
+<div class="form-container" id="updateteacher" >
+
+    <h2>Add Students Here</h2>
+
+    <form method="POST">
+        {%csrf_token%}
+
+        <div class="input-box">
+            <i class="bi bi-person-fill"></i>
+            <input type="text" placeholder="Rollno" name="rollno">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="First Name"  name="s1stname">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Last Name"  name="slstname">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="class Name"  name="cname">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Gender"  name="gender">
+        </div>
+        <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Address"  name="address">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Phone Number"  name="contact_no">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Email Address"  name="email">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Age"  name="age">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="Parent First Name"  name="father_1stname">
+        </div>
+         <div class="input-box">
+            <i class="bi bi-lock-fill"></i>
+            <input type="text" placeholder="parent Last Name"  name="father_lstname">
+        </div>
+
+
+        <button type="submit">update</button>
+        
+    </form>
+
+   
+
+</div>
+</body>
+</html>

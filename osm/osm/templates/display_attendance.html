@@ -1,0 +1,49 @@
+<html><head>    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity</head>
+    <body>
+        <form method="post">
+
+    {% csrf_token %}
+    <div>
+        <select>
+            <option></option>
+        </select>
+    </div>
+
+    <table class="table table-info table-striped" width="90px" border="1" cellpadding="10">
+
+        <tr >
+            <th>Roll No</th>
+            <th>Student  First Name</th>
+            <th>Student  Last Name</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Class Name</th>
+            
+        </tr>
+
+        {% for s in qs %}
+
+        <tr >
+
+            <td>{{s.srollno.rollno}}</td>
+
+            <td>{{s.srollno.s1stname}}</td>
+            <td>{{s.srollno.slstname}}</td>
+
+            <td>{{s.status}}</td>
+            <td>{{s.date}}</td>
+            <td>{{s.srollno.cname}}</td>
+            
+            
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    
+</form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+</html>

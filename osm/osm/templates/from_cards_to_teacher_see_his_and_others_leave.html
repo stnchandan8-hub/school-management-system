@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-color:lightskyblue;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="background-color: aquamarine;">
+        <table class="table table-bordered w-50 mx-auto" style="margin-top: 100px;"  ><tr>
+            <th>TEACHER ID</th>
+            <th>TEACHER FIRST NAME</th>
+            <th>TEACHER LAST NAME</th>
+            <th>LEAVE REASON</th>
+            <th>DATE</th>
+        </tr>
+    {%for leave in teacher_leave%}
+    <tr>
+        <td>{{leave.tid.tid}}</td>
+        <td>{{leave.tid.t_1st_name}}</td>
+        <td>{{leave.tid.t_last_name}}</td>
+        <td>{{leave.leave_reason}}</td>
+         <td>{{leave.date1_of_apply}}</td>
+        
+    </tr>{% endfor %}
+</table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>

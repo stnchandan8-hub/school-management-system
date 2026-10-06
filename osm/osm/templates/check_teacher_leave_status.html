@@ -1,0 +1,47 @@
+
+
+<html><head><link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">    </head>
+    <body>
+        
+
+    <table class="table table-info table-striped" width="100%" border="1" cellpadding="10">
+
+        <tr>
+            
+            <th>Teacher Id</th>
+            <th>Teacher  First Name</th>
+            <th>Teacher  Last Name</th>
+            <th>Reason For Leave</th>
+            <th>Date Of Apply</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+        </tr>
+
+        {% for r in stud %}
+
+        <tr >
+
+            <td>{{r.tid.tid}}</td>
+
+            <td>{{r.tid.t_1st_name}}</td>
+            <td>{{r.tid.t_last_name}}</td>
+            <td>{{r.leave_reason}}</td>
+             <td >{{r.date1_of_apply}}</td>
+           <td>{{r.tid.contactno}}</td>
+            <td>{{r.accept_or_reject}}</td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+    
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+</html>

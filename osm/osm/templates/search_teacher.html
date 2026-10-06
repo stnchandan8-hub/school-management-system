@@ -1,0 +1,161 @@
+{%load static%}<html><head><link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/add_teacher_popup.css' %}"> 
+  </head>
+    
+
+    <body>
+        
+          
+
+
+        
+        <div class="card chart-card shadow mt-4">
+            <h4>SELECTED TEACHER IS GIVEN BELLOW</h4>
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>TEACHER ID</th>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>AGE</th>
+                        <th>QUALIFICATION</th>
+                        <th>ADDRESS</th>
+                        <th>PHONE NUMBER</th>
+                        <th>GENDER</th>
+                        <th>EMAIL</th>
+                        <th colspan="2">ACTIONS</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                      {%for t1 in tq%}
+                    <tr>
+                        <td>{{t1.tid}}</td>
+                        <td>{{t1.t_1st_name}}</td>
+                        <td>{{t1.t_last_name}}</td>
+                        <td>{{t1.age}}</td>
+                        <td>{{t1.qualification}}</td>
+                        <td>{{t1.address}}</td>
+                        <td>{{t1.contactno}}</td>
+                        <td>{{t1.gender}}</td>
+                        <td>{{t1.email_of_teacher}}</td>
+                        <td><button class="btn btn-danger me-2 " onclick="openPopup('delete_teacher')">
+        Delete
+    </button>
+    <button class="btn btn-warning me-2 " onclick="openPopup('update_teacher')">
+        Update
+    </button></td>
+                        
+                       
+                         
+                        
+                        
+
+                        
+                        
+                    </tr>
+                    {%endfor%}
+
+                    
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+<!-- delete teacher popup form-->
+    <div class="popup" id="delete_teacher" style="display:none">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="closePopup('delete_teacher')">
+                &times;
+            </span>
+
+            <h3>Select Teacher id</h3>
+
+            <form method="POST" id="delete_teachers1" action="{% url 'delete_teacher'%}">
+                {%csrf_token%}
+                 <input type="text" placeholder="Teacher Id" id="teacher_ids" name="tid" >
+                 <span id="teacher_id_errors" class="error"></span><br><br>
+                 <button  type="submit" class="btn btn-danger me-2 ">
+                    Delete
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+<!-- update teacher popup form-->    
+    <div  class="popup" id="update_teacher" style="display:none,">
+
+        <div class="popup-content" >
+
+            <span class="close" onclick="closePopup('update_teacher')">
+                &times;
+            </span>
+
+            <h3>Add Teachers</h3>
+
+            <form method="POST"  id="update_teacher1" action="{% url 'update_teacher'%}">
+                {%csrf_token%}
+                
+                <label>Teacher Id</label>
+                 <input type="text" placeholder="Teacher Id" id="teacher_id1" name="tid" >
+                 <span id="teacher_id_error1" class="error"></span>
+                 
+                <label>First Name</label>
+                 <input type="text" placeholder="First Name" id="first_name1"  name="t_1st_name">
+                 <span id="first_name_error1" class="error"></span>
+                 <td><label>Last Name</label>
+                 <input type="text" id="last_name1" placeholder="Last Name" name="t_last_name">
+                 <span id="last_name_error1" class="error"></span>
+                 <label>Age</label>
+                 <input type="text" placeholder="Age" id="age1" name="age">
+                 <span id="age_error1" class="error"></span>
+                <label>Qualification</label>
+                 <input type="text" placeholder="Qualification" id="qualification1" name="qualification">
+                 <span id="qualification_error1" class="error"></span>
+                 <label>Address</label>
+                 <input type="text" placeholder="Address" id="address1" name="address">
+                 <span id="address_error1" class="error"></span>
+                 <label>Phone Number</label>
+                 <input type="text" placeholder="Phone Number" id="contactno1" name="contactno">
+                 <span id="phone_error1" class="error"></span>
+                 <div class="radio_collection"><label>Gender:</label>
+                 <input type="radio" name="gender" value="Male"> Male
+                 <input type="radio" name="gender" value="Female"> Female
+                 </div>
+                 <label>Email Address</label>
+                 <input type="text" placeholder="Email Address" id="mail1" name="email_of_teacher">
+                 <span id="mail_error1" class="error"></span>
+                    <button  type="submit" class="submit-btn">
+                    update
+                </button>
+                 
+        
+            </form>
+
+        </div>
+
+    </div>
+
+<script src="{% static 'js/add_validation_to_delete_teacher.js' %}"></script>
+ <script src="{% static 'js/add_validation_form_update_teacher.js' %}"></script>
+  <script src="{% static 'js/add_teacher_form_popup.js' %}"></script>
+
+
+
+     
+    
+    </body>
+</html>
